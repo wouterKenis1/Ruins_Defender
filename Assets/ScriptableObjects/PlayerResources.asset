@@ -12,3 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 238886746ac168e4c9f817e6579b4f1d, type: 3}
   m_Name: PlayerResources
   m_EditorClassIdentifier: 
+  crystal_red: 1
+  crystal_green: 2
+  crystal_blue: 3
