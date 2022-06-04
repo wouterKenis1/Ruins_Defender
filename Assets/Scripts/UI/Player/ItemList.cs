@@ -12,7 +12,7 @@ public class ItemList : MonoBehaviour
 
     private void Awake()
     {
-        player = FindObjectOfType<Player>();
+        player = Player.Instance;
         player.e_itemsChanged.AddListener(Refresh);
     }
 

@@ -6,6 +6,17 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
+    static Player instance;
+    public static Player Instance
+    {
+        get
+        {
+            if(instance == null)
+                instance = FindObjectOfType<Player>();
+            return instance;
+        }
+    }
+
     public StringIntDict items = new StringIntDict();
 
 
