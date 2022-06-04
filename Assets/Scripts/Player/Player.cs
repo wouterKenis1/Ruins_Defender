@@ -6,8 +6,7 @@ using UnityEngine.Events;
 
 public class Player : MonoBehaviour
 {
-    public ResourceList resources;
-    public Dictionary<Item, int> items = new Dictionary<Item, int>();
+    public StringIntDict items = new StringIntDict();
 
 
     public float health = 100f;
@@ -19,10 +18,13 @@ public class Player : MonoBehaviour
     public float conversionCost = 20f;
     public float conversionResult = 40f;
 
+
+
     public bool wasDeadLastFrame;
 
-    public UnityEvent e_OnDeath = new UnityEvent();
 
+    public UnityEvent e_OnDeath = new UnityEvent();
+    public UnityEvent e_itemsChanged = new UnityEvent();
 
     public bool IsDead
     {
@@ -32,11 +34,16 @@ public class Player : MonoBehaviour
         }
     }
 
+    public StringIntDict Items
+    {
+        get { return items; }
+        set { items = value; e_itemsChanged.Invoke(); }
+    }
+
     void Awake()
     {
         health = maxHealth;
         wasDeadLastFrame = false;
-        resources.ClearResources();
     }
 
     private void Update()
@@ -56,54 +63,82 @@ public class Player : MonoBehaviour
 
     public void CheckDeath()
     {
-        if(IsDead && !wasDeadLastFrame)
+        if (IsDead && !wasDeadLastFrame)
         {
             e_OnDeath.Invoke();
             Debug.LogWarning("Player Died");
         }
         wasDeadLastFrame = IsDead;
     }
-
-    public void AddResource(int type)
-    {
-        resources.AddRecource((Resource)type);
-    }
-
     public void RegenHealth()
     {
         health += healthRegen * Time.deltaTime;
-        health = Mathf.Clamp(health,0,maxHealth);
+        health = Mathf.Clamp(health, 0, maxHealth);
     }
-
     public void TakeDamage(float dmg)
     {
         health -= dmg;
-        health = Mathf.Clamp(health, 0,maxHealth);
+        health = Mathf.Clamp(health, 0, maxHealth);
         Debug.Log("Player took " + dmg + " damage");
     }
-
     public void ConvertHealthToMana()
     {
         TakeDamage(conversionCost);
         GainMana(conversionResult);
     }
-
     private void GainMana(float gain)
     {
         mana += gain;
         mana = Mathf.Clamp(mana, 0, maxMana);
     }
-
-
-
-
+    public void AddItem(string itemName)
+    {
+        AddItem(itemName, 1);
+    }
+    public void AddItem(string itemName, int amount)
+    {
+        if (!Items.ContainsKey(itemName))
+        {
+            Items.Add(itemName, 0);
+        }
+        Items[itemName] += amount;
+        e_itemsChanged.Invoke();
+    }
+    public void RemoveItem(string itemName, int amount)
+    {
+        if (!Items.ContainsKey(itemName))
+        {
+            Items.Add(itemName, 0);
+        }
+        Items[itemName] -= amount;
+        e_itemsChanged.Invoke();
+    }
+    public void RemoveItems(StringIntDict cost)
+    {
+        foreach(var entry in cost)
+        {
+            RemoveItem(entry.Key, entry.Value);
+        }
+    }
     public void LogItems()
     {
         string log = "";
-        foreach(var entry in items)
+        foreach(var entry in Items)
         {
-            log += (entry.Key.itemName + ": " + entry.Value) + "\n";
+            log += (entry.Key + ": " + entry.Value) + "\n";
         }
         Debug.Log(log);
+    }
+
+    public bool HasResources(StringIntDict cost)
+    {
+        foreach(var entry in cost)
+        {
+            if(!items.ContainsKey(entry.Key) || items[entry.Key] < entry.Value)
+            {
+                return false;
+            }        
+        }
+        return true;
     }
 }
