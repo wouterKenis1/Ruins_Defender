@@ -7,6 +7,9 @@ public class PlayerInput : MonoBehaviour
 {
 
     private CharacterController _input;
+    private Rigidbody rb;
+    [SerializeField]
+    private float forceMulti;
 
     [SerializeField]
     private float moveSpeed;
@@ -16,12 +19,22 @@ public class PlayerInput : MonoBehaviour
     private bool rotationalMovement;
 
     [SerializeField]
-    private Camera camera;
+    private Camera camCam;
+
+    /*
+    [SerializeField]
+    private float dashCooldownTotal = 2;
+    private float dashCooldownCurrent;
+    private float dashLimit;
+    [SerializeField]
+    private float dashLimitTotal = 2;
+    */
 
 
     private void Awake()
     {
         _input = GetComponent<CharacterController>();
+        rb = GetComponent<Rigidbody>();
     }
 
     void Update()
@@ -36,7 +49,7 @@ public class PlayerInput : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0))
         {
-            Ray ray = camera.ScreenPointToRay(_input.MousePosition);
+            Ray ray = camCam.ScreenPointToRay(_input.MousePosition);
 
             if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
             {
@@ -47,11 +60,40 @@ public class PlayerInput : MonoBehaviour
                 }
             }
         }
+
+
+        /*
+        //THIS NEEDS TO COST MANA - ADD MANA COST  - ADD MANA COST - ADD MANA COST!!!
+        if (Input.GetButton("Jump") && (dashCooldownCurrent <= 0 || dashLimit < dashLimitTotal))
+        {
+            dashCooldownCurrent = dashCooldownTotal;
+            dashLimit += Time.deltaTime;
+
+            rb.AddForce(transform.forward * forceMulti * Time.deltaTime);
+
+        }
+        else
+        {
+            rb.velocity = Vector3.zero;
+
+            if (dashCooldownCurrent == 0)
+            {
+                dashLimit = 0;
+            }
+        }
+        if (dashCooldownCurrent > 0)
+        {
+            dashCooldownCurrent -= Time.deltaTime;
+            dashCooldownCurrent = Mathf.Max(dashCooldownCurrent, 0);
+        }
+        */
+        
+
     }
 
     private void RotateTowardMouseVector()
     {
-        Ray ray = camera.ScreenPointToRay(_input.MousePosition);
+        Ray ray = camCam.ScreenPointToRay(_input.MousePosition);
 
         if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
         {
@@ -82,7 +124,7 @@ public class PlayerInput : MonoBehaviour
     {
         var speed = moveSpeed * Time.deltaTime;
 
-        targetVector = Quaternion.Euler(0, camera.gameObject.transform.eulerAngles.y, 0) * targetVector;
+        targetVector = Quaternion.Euler(0, camCam.gameObject.transform.eulerAngles.y, 0) * targetVector;
         var targetPosition = transform.position + targetVector * speed;
         transform.position = targetPosition;
         return targetVector;
