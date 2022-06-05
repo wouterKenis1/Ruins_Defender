@@ -28,7 +28,7 @@ public class ClickableObject : MonoBehaviour
         wasInrange = isInRange;
     }
 
-    public void Click()
+    public virtual void Click()
     {
         // if maxRange less or equal to 0; any click will work
         // else, only invoke if player is in range

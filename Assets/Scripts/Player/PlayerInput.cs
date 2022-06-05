@@ -24,6 +24,9 @@ public class PlayerInput : MonoBehaviour
     [SerializeField]
     private LayerMask lookMask;
 
+    [SerializeField]
+    private KeyCode interactKey = KeyCode.E;
+
     /*
     [SerializeField]
     private float dashCooldownTotal = 2;
@@ -88,7 +91,7 @@ public class PlayerInput : MonoBehaviour
 
     private void ClickDetection()
     {
-        if (Input.GetMouseButtonDown(0))
+        if (Input.GetKeyDown(interactKey))
         {
             Ray ray = camCam.ScreenPointToRay(_input.MousePosition);
 
@@ -98,7 +101,6 @@ public class PlayerInput : MonoBehaviour
                 //{
                 var whatAmIHitting = hitInfo.collider.gameObject;
                 Debug.Log(whatAmIHitting.name);
-                castSpell();
 
                 var clickable = whatAmIHitting.GetComponentInChildren<ClickableObject>();
                  
@@ -107,6 +109,17 @@ public class PlayerInput : MonoBehaviour
                         clickable.Click();
                     }
                 //}
+            }
+        }
+
+        if(Input.GetMouseButtonDown(0))
+        {
+            Ray ray = camCam.ScreenPointToRay(_input.MousePosition);
+
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
+            {
+                castSpell();
+                
             }
         }
     }

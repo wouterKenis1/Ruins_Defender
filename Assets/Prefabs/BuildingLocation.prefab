@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 8316707667796257325}
   - component: {fileID: 8316707667796257324}
   - component: {fileID: 8316707667796257323}
+  - component: {fileID: 5129727246601532462}
   m_Layer: 0
   m_Name: BuildingLocation
   m_TagString: Untagged
@@ -1167,6 +1168,33 @@ MeshCollider:
   m_Convex: 0
   m_CookingOptions: 30
   m_Mesh: {fileID: 0}
+--- !u!114 &5129727246601532462
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8316707667796257322}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3466dcfa430cf644e84de53385c9e86a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  e_OnClicked:
+    m_PersistentCalls:
+      m_Calls: []
+  e_OnPlayerInRange:
+    m_PersistentCalls:
+      m_Calls: []
+  e_OnPlayerLeftRange:
+    m_PersistentCalls:
+      m_Calls: []
+  maxPlayerRange: 5
+  cost:
+    m_keys:
+    - Obelisk
+    m_values: 01000000
+  obelisk: {fileID: 8316707667886393392}
 --- !u!1 &8316707667886393392
 GameObject:
   m_ObjectHideFlags: 0
@@ -3174,7 +3202,7 @@ MonoBehaviour:
   m_PreserveMeshAssetOnDestroy: 0
   assetGuid: 
   m_Mesh: {fileID: 0}
-  m_VersionIndex: 4617
+  m_VersionIndex: 4620
   m_IsSelectable: 1
   m_SelectedFaces: 
   m_SelectedEdges: []
