@@ -13,6 +13,7 @@ public class Weapon : MonoBehaviour
 
     public float castSpeed = 2;
     public float castCooldown = 0;
+    public float manaCost = 5;
 
     public static Weapon Instance;
 
@@ -23,14 +24,19 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-        castCooldown = Mathf.Clamp01(castCooldown - Time.deltaTime);
+        castCooldown = Mathf.Max(castCooldown - Time.deltaTime,0);
     }
 
     public void castSpell()
     {
+        if(Player.Instance.mana < manaCost)
+        {
+            return;
+        }
         if (castCooldown <= 0)
         {
-            castCooldown = 1 / castSpeed;
+            Player.Instance.RemoveMana(manaCost);
+            castCooldown = 1f / castSpeed;
             Instantiate(projectilePrefab, castPoint.position, castPoint.rotation);
         }
     }

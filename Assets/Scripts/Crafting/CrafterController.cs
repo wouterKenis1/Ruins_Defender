@@ -42,5 +42,4 @@ public class CrafterController : MonoBehaviour
             Debug.LogWarning("Player does not have enough resources");
         }
     }
-
 }

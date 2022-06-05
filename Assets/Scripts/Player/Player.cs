@@ -56,7 +56,18 @@ public class Player : MonoBehaviour
         health = maxHealth;
         wasDeadLastFrame = false;
     }
+    private void OnTriggerEnter(Collider other)
+    {
+        Debug.Log("Player was hit by: " + other.name);
 
+        var enemy = other.attachedRigidbody.GetComponent<Enemy>();
+        if (enemy != null)
+        {
+            TakeDamage(enemy.dmg);
+        }
+
+        Destroy(other.attachedRigidbody.gameObject);
+    }
     private void Update()
     {
     }
@@ -92,6 +103,16 @@ public class Player : MonoBehaviour
         health = Mathf.Clamp(health, 0, maxHealth);
         Debug.Log("Player took " + dmg + " damage");
     }
+    public void RemoveMana(float amount)
+    {
+        mana -= amount;
+        mana = Mathf.Clamp(mana, 0, maxMana);
+    }
+    public void AddMana(float amount)
+    {
+        mana += amount;
+        mana = Mathf.Clamp(mana, 0, maxMana);
+    }
     public void ConvertHealthToMana()
     {
         TakeDamage(conversionCost);
@@ -117,16 +138,23 @@ public class Player : MonoBehaviour
     }
     public void RemoveItem(string itemName, int amount)
     {
-        if (!Items.ContainsKey(itemName))
+        if(itemName == "HEALTH")
         {
-            Items.Add(itemName, 0);
+            TakeDamage(amount);
         }
-        Items[itemName] -= amount;
-        if(Items[itemName] == 0)
+        else
         {
-            Items.Remove(itemName);
+            if (!Items.ContainsKey(itemName))
+            {
+                Items.Add(itemName, 0);
+            }
+            Items[itemName] -= amount;
+            if (Items[itemName] == 0)
+            {
+                Items.Remove(itemName);
+            }
+            e_itemsChanged.Invoke();
         }
-        e_itemsChanged.Invoke();
     }
     public void RemoveItems(StringIntDict cost)
     {
@@ -149,6 +177,10 @@ public class Player : MonoBehaviour
     {
         foreach(var entry in cost)
         {
+            if(entry.Key == "HEALTH")
+            {
+                continue;
+            }
             if(!items.ContainsKey(entry.Key) || items[entry.Key] < entry.Value)
             {
                 return false;

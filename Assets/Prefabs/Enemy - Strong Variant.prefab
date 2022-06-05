@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 27486216, guid: 6d94f33dbc009874ea955e6240ef6a3b, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: dfe2f28760fd4e247ab2de05d9421940, type: 2}
     - target: {fileID: 8560542594320183360, guid: 6d94f33dbc009874ea955e6240ef6a3b, type: 3}
       propertyPath: m_UseGravity
       value: 1
@@ -25,15 +29,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8560542594320183388, guid: 6d94f33dbc009874ea955e6240ef6a3b, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 3.093
+      value: 2.348039
       objectReference: {fileID: 0}
     - target: {fileID: 8560542594320183388, guid: 6d94f33dbc009874ea955e6240ef6a3b, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1
+      value: 0.9813794
       objectReference: {fileID: 0}
     - target: {fileID: 8560542594320183388, guid: 6d94f33dbc009874ea955e6240ef6a3b, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0
+      value: 2.3609924
       objectReference: {fileID: 0}
     - target: {fileID: 8560542594320183388, guid: 6d94f33dbc009874ea955e6240ef6a3b, type: 3}
       propertyPath: m_LocalRotation.w

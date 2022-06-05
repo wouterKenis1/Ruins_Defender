@@ -29,13 +29,9 @@ public class Enemy : MonoBehaviour
         {
             return;
         }
-
         UpdatePath();
         agent.speed = speed;
-
     }
-
-
     public void UpdatePath()
     {
         if(agent.CalculatePath(target.position,path))
@@ -43,5 +39,4 @@ public class Enemy : MonoBehaviour
             agent.SetPath(path);
         }
     }
-    
 }

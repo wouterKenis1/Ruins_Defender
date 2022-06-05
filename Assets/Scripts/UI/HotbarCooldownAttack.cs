@@ -10,8 +10,12 @@ public class HotbarCooldownAttack : HotbarCooldown
         weapon = FindObjectOfType<Weapon>();
     }
 
+    public override float GetMaxValue()
+    {
+        return (1 / weapon.castSpeed);
+    }
     public override float GetValue()
     {
-        return weapon.castCooldown / (1/weapon.castSpeed);
+        return weapon.castCooldown ;
     }
 }
