@@ -46,9 +46,13 @@ public class PlayerInput : MonoBehaviour
 
         var movementVector = MoveTowardTarget(targetVector);
         if (rotationalMovement)
+        {
             RotateTowardMovementVector(movementVector);
+        }
         else
+        {
             RotateTowardMouseVector();
+        }
 
         ClickDetection();
 
@@ -90,19 +94,26 @@ public class PlayerInput : MonoBehaviour
 
             if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
             {
-                if (hitInfo.collider != null)
-                {
-                    var whatAmIHitting = hitInfo.collider.gameObject;
-                    Debug.Log(whatAmIHitting.name);
+                //if (hitInfo.collider != null)
+                //{
+                var whatAmIHitting = hitInfo.collider.gameObject;
+                Debug.Log(whatAmIHitting.name);
+                castSpell();
 
-                    var clickable = whatAmIHitting.GetComponentInChildren<ClickableObject>();
-                    if (clickable != null)
+                var clickable = whatAmIHitting.GetComponentInChildren<ClickableObject>();
+                 
+                   if (clickable != null)
                     {
                         clickable.Click();
                     }
-                }
+                //}
             }
         }
+    }
+
+    void castSpell()
+    {
+        Weapon.Instance.castSpell();
     }
 
     private void RotateTowardMouseVector()
