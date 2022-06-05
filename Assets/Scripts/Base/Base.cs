@@ -16,13 +16,13 @@ public class Base : MonoBehaviour
     {
         Debug.Log("Base was hit by: " + other.name);
 
-        var enemy = other.GetComponent<Enemy>();
+        var enemy = other.attachedRigidbody.GetComponent<Enemy>();
         if(enemy != null)
         {
             player.TakeDamage(enemy.dmg);
         }
 
-        Destroy(other.gameObject);
+        Destroy(other.attachedRigidbody.gameObject);
     }
 
 

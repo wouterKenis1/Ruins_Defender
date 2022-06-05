@@ -15,6 +15,7 @@ public class Projectile : MonoBehaviour
     private Vector3 direction;
 
     public LayerMask layermask;
+    private bool moving = true;
 
     // Start is called before the first frame update
     void Start()
@@ -33,7 +34,10 @@ public class Projectile : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        moveProjectile();
+        if(moving)
+        {
+            moveProjectile();
+        }
 
         if (projectileLife >= projectileLifeExpectancy)
         {
@@ -59,29 +63,25 @@ public class Projectile : MonoBehaviour
         
         return targetDirection;
     }
-
     void moveProjectile()
     {
-        //transform.Translate(direction.normalized * projectileSpeed * Time.deltaTime);
         transform.position += direction.normalized * projectileSpeed * Time.deltaTime;
     }
-
     private void OnTriggerEnter(Collider other)
     {
-        Enemy enemy = other.GetComponent<Enemy>();
-        if(enemy != null)
+        Debug.Log("Trigger");
+        if (other.attachedRigidbody != null)
         {
-            Destroy(enemy.gameObject);
-            Debug.Log("Destroyed enemy");
-        }
+            Enemy enemy = other.attachedRigidbody.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                Destroy(other.attachedRigidbody.gameObject);
+                Debug.Log("Destroyed enemy");
+            }
+        }        
     }
-    //private void OnCollisionEnter(Collision collision)
-    //{
-    //    Enemy enemy = collision.gameObject.GetComponent<Enemy>();
-    //    if (enemy != null)
-    //    {
-    //        Destroy(enemy.gameObject);
-    //    }
-    //}
-
+    private void OnCollisionEnter(Collision collision)
+    {
+        moving = false;
+    }
 }

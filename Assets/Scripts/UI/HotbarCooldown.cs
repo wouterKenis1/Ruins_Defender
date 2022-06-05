@@ -14,7 +14,8 @@ public class HotbarCooldown : MonoBehaviour
 
     // value [0;1]
     private float value;
-
+    private float maxValue;
+    private float ratio;
     private void OnEnable()
     {
         if(text != null)
@@ -33,23 +34,29 @@ public class HotbarCooldown : MonoBehaviour
         {
             use_img = false;
         }
-
     }
     public void Update()
     {
-        value = Mathf.Clamp01(GetValue());
+        value = GetValue();
+        maxValue = GetMaxValue();
+        ratio = Mathf.Clamp01(value / maxValue);
+
         if(use_text)
         {
-            text.gameObject.SetActive(value > 0f);
+            text.gameObject.SetActive(ratio > 0f);
             text.text = value.ToString("F1");
         }
         if(use_img )
         {
-            img.gameObject.SetActive(value > 0f);
-            img.transform.localScale = new Vector3(value, 1, 1);
+            img.gameObject.SetActive(ratio  > 0f);
+            img.transform.localScale = new Vector3(ratio, 1, 1);
         }
     }
 
+    public virtual float GetMaxValue()
+    {
+        return 1f;
+    }
     public virtual float GetValue()
     {
         return 0f;
