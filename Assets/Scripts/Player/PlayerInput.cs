@@ -21,6 +21,9 @@ public class PlayerInput : MonoBehaviour
     [SerializeField]
     private Camera camCam;
 
+    [SerializeField]
+    private LayerMask lookMask;
+
     /*
     [SerializeField]
     private float dashCooldownTotal = 2;
@@ -41,25 +44,13 @@ public class PlayerInput : MonoBehaviour
     {
         var targetVector = new Vector3(_input.InputVector.x, 0, _input.InputVector.y);
 
-        var movementVector= MoveTowardTarget(targetVector);
+        var movementVector = MoveTowardTarget(targetVector);
         if (rotationalMovement)
             RotateTowardMovementVector(movementVector);
         else
             RotateTowardMouseVector();
 
-        if (Input.GetMouseButtonDown(0))
-        {
-            Ray ray = camCam.ScreenPointToRay(_input.MousePosition);
-
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
-            {
-                if (hitInfo.collider != null)
-                {
-                    var whatAmIHitting = hitInfo.collider.gameObject;
-                  Debug.Log(whatAmIHitting.name);
-                }
-            }
-        }
+        ClickDetection();
 
 
         /*
@@ -87,15 +78,38 @@ public class PlayerInput : MonoBehaviour
             dashCooldownCurrent = Mathf.Max(dashCooldownCurrent, 0);
         }
         */
-        
 
+
+    }
+
+    private void ClickDetection()
+    {
+        if (Input.GetMouseButtonDown(0))
+        {
+            Ray ray = camCam.ScreenPointToRay(_input.MousePosition);
+
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
+            {
+                if (hitInfo.collider != null)
+                {
+                    var whatAmIHitting = hitInfo.collider.gameObject;
+                    Debug.Log(whatAmIHitting.name);
+
+                    var clickable = whatAmIHitting.GetComponentInChildren<ClickableObject>();
+                    if (clickable != null)
+                    {
+                        clickable.Click();
+                    }
+                }
+            }
+        }
     }
 
     private void RotateTowardMouseVector()
     {
         Ray ray = camCam.ScreenPointToRay(_input.MousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 300f, lookMask))
         {
             var target = hitInfo.point;
             target.y = transform.position.y;
