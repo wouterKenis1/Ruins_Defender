@@ -14,7 +14,10 @@ public class EnemySpawner : MonoBehaviour
     private void Awake()
     {
         cycleController = FindObjectOfType<TimeCycleController>();
-        cycleController.e_OnNightStart.AddListener(Spawn);
+        if(cycleController != null)
+        {
+            cycleController.e_OnNightStart.AddListener(Spawn);
+        }
     }
 
     [ContextMenu("Spawn")]

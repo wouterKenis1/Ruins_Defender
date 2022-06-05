@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class Enemy : MonoBehaviour
 {
@@ -12,22 +13,35 @@ public class Enemy : MonoBehaviour
     public float heightAmplitude = 0.5f;
     public float heightFrequency = 1.5f;
 
+    NavMeshAgent agent;
+    NavMeshPath path ;
 
+    private void Awake()
+    {
+        agent = GetComponent<NavMeshAgent>();
+        path = agent.path;
+    }
     private void Update()
     {
-        if(target == null)
+        agent.baseOffset = heightAmplitude * Mathf.Sin(Time.time * heightFrequency) + heightOffset;
+        
+        if (target == null)
         {
             return;
         }
-        // calculate position moving towards target
-        Vector3 newPos = Vector3.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
 
-        // bounce in air
-        newPos.y = heightAmplitude * Mathf.Sin(Time.time * heightFrequency) + heightOffset;
+        UpdatePath();
+        agent.speed = speed;
 
-        // set position
-        transform.position = newPos;
     }
 
 
+    public void UpdatePath()
+    {
+        if(agent.CalculatePath(target.position,path))
+        {
+            agent.SetPath(path);
+        }
+    }
+    
 }
