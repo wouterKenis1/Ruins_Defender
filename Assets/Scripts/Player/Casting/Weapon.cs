@@ -12,7 +12,7 @@ public class Weapon : MonoBehaviour
     GameObject projectilePrefab;
 
     public float castSpeed = 2;
-    private float lastTimeCast = 0;
+    public float castCooldown = 0;
 
     public static Weapon Instance;
 
@@ -23,14 +23,14 @@ public class Weapon : MonoBehaviour
 
     void Update()
     {
-       
+        castCooldown = Mathf.Clamp01(castCooldown - Time.deltaTime);
     }
 
     public void castSpell()
     {
-        if (lastTimeCast + castSpeed <= Time.time)
+        if (castCooldown <= 0)
         {
-            lastTimeCast = Time.time;
+            castCooldown = 1 / castSpeed;
             Instantiate(projectilePrefab, castPoint.position, castPoint.rotation);
         }
     }

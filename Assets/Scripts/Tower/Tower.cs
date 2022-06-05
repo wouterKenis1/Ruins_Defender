@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class Tower : MonoBehaviour
@@ -15,7 +16,6 @@ public class Tower : MonoBehaviour
     List<Enemy> enemiesInRange = new List<Enemy>();
 
     
-
     private void OnTriggerEnter(Collider other)
     {
         var enemy = other.GetComponent<Enemy>();
@@ -23,6 +23,7 @@ public class Tower : MonoBehaviour
         {
             enemiesInRange.Add(enemy);
         }
+        RemoveNullFromEnemyList();
         Debug.Log("enemy in range");
     }
     private void OnTriggerExit(Collider other)
@@ -32,7 +33,12 @@ public class Tower : MonoBehaviour
         {
             enemiesInRange.Remove(enemy);
         }
+        RemoveNullFromEnemyList();
         Debug.Log("enemy left range");
+    }
+    public void RemoveNullFromEnemyList()
+    {
+        enemiesInRange = enemiesInRange.Where(enemy => enemy != null).ToList();
     }
 
     private void Update()

@@ -5,9 +5,23 @@ using UnityEngine;
 
 public class CrafterController : MonoBehaviour
 {
+    static CrafterController instance;
+    public static CrafterController Instance
+    {
+        get
+        {
+            if(instance == null)
+            {
+                instance = FindObjectOfType<CrafterController>();
+            }
+            return instance;
+        }
+    }
+
     Player player;
 
     public List<Item> items;
+
 
     private void Awake()
     {

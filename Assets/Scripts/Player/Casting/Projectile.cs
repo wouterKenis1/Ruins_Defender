@@ -12,7 +12,9 @@ public class Projectile : MonoBehaviour
     private float projectileLife;
     private float projectileLifeExpectancy;
 
-    //private Vector3 direction;
+    private Vector3 direction;
+
+    public LayerMask layermask;
 
     // Start is called before the first frame update
     void Start()
@@ -25,7 +27,7 @@ public class Projectile : MonoBehaviour
 
     private void OnEnable()
     {
-        //direction = CalculateTargetDirection();
+        direction = CalculateTargetDirection();
     }
 
     // Update is called once per frame
@@ -49,9 +51,10 @@ public class Projectile : MonoBehaviour
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
+        if (Physics.Raycast(ray, out RaycastHit hitInfo, 300f, layermask))
         {
             targetDirection = hitInfo.point - transform.position;
+            Debug.Log("Position " + transform.position + ", MousePos " + hitInfo.point + ", Vector " + targetDirection);
         }
         
         return targetDirection;
@@ -59,9 +62,26 @@ public class Projectile : MonoBehaviour
 
     void moveProjectile()
     {
-        Vector3 direction = CalculateTargetDirection();
-        transform.Translate(direction.normalized * projectileSpeed * Time.deltaTime);
+        //transform.Translate(direction.normalized * projectileSpeed * Time.deltaTime);
+        transform.position += direction.normalized * projectileSpeed * Time.deltaTime;
     }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        Enemy enemy = other.GetComponent<Enemy>();
+        if(enemy != null)
+        {
+            Destroy(enemy.gameObject);
+            Debug.Log("Destroyed enemy");
+        }
+    }
+    //private void OnCollisionEnter(Collision collision)
+    //{
+    //    Enemy enemy = collision.gameObject.GetComponent<Enemy>();
+    //    if (enemy != null)
+    //    {
+    //        Destroy(enemy.gameObject);
+    //    }
+    //}
 
 }

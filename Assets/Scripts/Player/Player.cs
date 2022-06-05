@@ -122,6 +122,10 @@ public class Player : MonoBehaviour
             Items.Add(itemName, 0);
         }
         Items[itemName] -= amount;
+        if(Items[itemName] == 0)
+        {
+            Items.Remove(itemName);
+        }
         e_itemsChanged.Invoke();
     }
     public void RemoveItems(StringIntDict cost)
