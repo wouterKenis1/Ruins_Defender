@@ -98,7 +98,7 @@ public class PlayerInput : MonoBehaviour
         {
             Ray ray = camCam.ScreenPointToRay(_input.MousePosition);
 
-            if (Physics.Raycast(ray, out RaycastHit hitInfo, maxDistance: 300f))
+            if (Physics.Raycast(ray, out RaycastHit hitInfo, 300f, lookMask))
             {
                 //if (hitInfo.collider != null)
                 //{
