@@ -8,7 +8,7 @@ public class KillFloor : MonoBehaviour
     //[SerializeField] private float drown;
 
 
-    private void OnTriggerEnter(Collider water)
+    private void OnTriggerEnter(Collider other)
     {
         Player.Instance.health = 0;
     }

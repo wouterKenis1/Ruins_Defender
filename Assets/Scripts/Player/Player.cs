@@ -95,8 +95,15 @@ public class Player : MonoBehaviour
         {
             e_OnDeath.Invoke();
             Debug.LogWarning("Player Died");
+            
         }
         wasDeadLastFrame = IsDead;
+
+        if (wasDeadLastFrame)
+        {
+            //This is for the animator
+            GetComponent<Animator>().SetTrigger("death");
+        }
     }
     public void RegenHealth()
     {

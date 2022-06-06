@@ -14,9 +14,9 @@ GameObject:
   - component: {fileID: 27486216}
   - component: {fileID: 27486215}
   - component: {fileID: 27486214}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Skull
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -6027,7 +6027,7 @@ GameObject:
   - component: {fileID: 954268097}
   m_Layer: 8
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
