@@ -102,7 +102,7 @@ public class Player : MonoBehaviour
         if (wasDeadLastFrame)
         {
             //This is for the animator
-            GetComponent<Animator>().SetTrigger("death");
+            //GetComponent<Animator>().SetTrigger("death");
         }
     }
     public void RegenHealth()

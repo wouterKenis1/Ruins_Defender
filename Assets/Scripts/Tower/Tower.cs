@@ -18,7 +18,7 @@ public class Tower : MonoBehaviour
     
     private void OnTriggerEnter(Collider other)
     {
-        var enemy = other.GetComponent<Enemy>();
+        var enemy = other.attachedRigidbody.GetComponent<Enemy>();
         if (enemy != null)
         {
             enemiesInRange.Add(enemy);
@@ -28,7 +28,7 @@ public class Tower : MonoBehaviour
     }
     private void OnTriggerExit(Collider other)
     {
-        var enemy = other.GetComponent<Enemy>();
+        var enemy = other.attachedRigidbody.GetComponent<Enemy>();
         if (enemy != null && enemiesInRange.Contains(enemy))
         {
             enemiesInRange.Remove(enemy);
