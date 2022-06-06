@@ -134,6 +134,11 @@ public class PlayerInput : MonoBehaviour
         {
             Player.Instance.ConvertHealthToMana();
         }
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Application.Quit();
+        }
     }
 
     void castSpell()

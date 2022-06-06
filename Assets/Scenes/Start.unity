@@ -963,13 +963,13 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Text Tutorial:
+  m_text: 'This Text Tutorial will help you survive:
 
-    Explore the island and find 2 red, and 2 black crystals.
-    Go to the crafting bench and build an Obelisk, it requires one of each crafted
-    resource (You can only see your inventory during crafting here). Find a building
-    location marked by 4 black markers and interact with it. The Obelisk will help
-    fend off enemies! Good Luck.'
+    Explore the island and
+    find 2 red, and 2 black crystals. Go to the crafting bench and build an Obelisk,
+    it requires one of each crafted resource (You can only see your inventory during
+    crafting here). Find a building location marked by 4 black markers and interact
+    with it. The Obelisk will help fend off enemies! Good Luck.'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1105,7 +1105,7 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls: []
   m_text: "Keybinding:\nCast Spell\t\t: Left Click\nConvert Health\t: R\nInteract\t\t:
-    E\nRotate Camera\t: Hold Middle Mouse"
+    E\nRotate Camera\t: Hold Middle Mouse\nQuit Game\t\t: Escape"
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
