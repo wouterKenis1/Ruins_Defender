@@ -13,7 +13,7 @@ public class ResourceActivator : MonoBehaviour
     private void Awake()
     {
         resources.Clear();
-        var clickableObjects = GetComponentsInChildren<ClickableObject>();
+        var clickableObjects = GetComponentsInChildren<ClickableObject>(true);
         foreach(var clickableObj in clickableObjects)
         {
             resources.Add(clickableObj.gameObject);
