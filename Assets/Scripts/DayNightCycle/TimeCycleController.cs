@@ -7,6 +7,7 @@ using UnityEngine.Events;
 public class TimeCycleController : MonoBehaviour
 {
     public float cycleDuration = 60f;
+    public float dayDuration = 20f;
     public Transform skysphere;
 
     public float timeOfCycle = 0;
@@ -21,14 +22,14 @@ public class TimeCycleController : MonoBehaviour
     {
         get
         {
-            return timeOfCycle <= cycleDuration / 2f;
+            return timeOfCycle <= dayDuration;
         }
     }
     public bool IsNight
     {
         get
         {
-            return timeOfCycle > cycleDuration / 2f;
+            return timeOfCycle > dayDuration;
         }
     }
 
