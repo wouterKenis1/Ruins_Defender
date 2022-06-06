@@ -5,7 +5,7 @@ using UnityEngine;
 public class WaterWaves : MonoBehaviour
 {
     
-      public Renderer renderer;
+      public Renderer rendererWave;
       MaterialPropertyBlock block;
 
       public Vector2 amplitude = new Vector2(0.4f, 0.5f);
@@ -25,7 +25,7 @@ public class WaterWaves : MonoBehaviour
           offset.x = startPos.x + Mathf.Sin(Time.time * speed.x) * amplitude.x;
           offset.y = startPos.y + Mathf.Cos(Time.time * speed.y) * amplitude.y;
 
-          renderer.material.SetTextureOffset("_MainTex", offset);
+          rendererWave.material.SetTextureOffset("_MainTex", offset);
       }
     
 }
