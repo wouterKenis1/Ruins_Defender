@@ -4,13 +4,20 @@ using UnityEngine;
 
 public class KillFloor : MonoBehaviour
 {
-    //[SerializeField] private GameObject playerReference;
-    //[SerializeField] private float drown;
+    [SerializeField] private GameObject playerReference;
 
+    private void Start()
+    {
+        
+    }
 
     private void OnTriggerEnter(Collider other)
     {
-        Player.Instance.health = 0;
+        if (other.transform.gameObject.name == "Player")
+        {
+            Player.Instance.health = 0;
+        }
+            
     }
 }
 

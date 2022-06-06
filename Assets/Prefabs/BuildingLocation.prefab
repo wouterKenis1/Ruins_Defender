@@ -112,6 +112,7 @@ GameObject:
   - component: {fileID: 8316707667796257324}
   - component: {fileID: 8316707667796257323}
   - component: {fileID: 5129727246601532462}
+  - component: {fileID: 7430234969133486186}
   m_Layer: 0
   m_Name: BuildingLocation
   m_TagString: Untagged
@@ -1292,6 +1293,19 @@ MonoBehaviour:
     - Obelisk
     m_values: 01000000
   obelisk: {fileID: 8316707667886393392}
+--- !u!65 &7430234969133486186
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8316707667796257322}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.5650992, y: 1.3506407, z: 1.36908}
+  m_Center: {x: 2.1378014, y: 0.79320085, z: 2.5830066}
 --- !u!1 &8316707667886393392
 GameObject:
   m_ObjectHideFlags: 0
@@ -3444,6 +3458,7 @@ MonoBehaviour:
   lineWidthMax: 1
 --- !u!120 &1722339297261403319
 LineRenderer:
+  serializedVersion: 2
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -3537,10 +3552,13 @@ LineRenderer:
     numCapVertices: 0
     alignment: 0
     textureMode: 0
+    textureScale: {x: 1, y: 1}
     shadowBias: 0.5
     generateLightingData: 0
+  m_MaskInteraction: 0
   m_UseWorldSpace: 1
   m_Loop: 0
+  m_ApplyActiveColorSpace: 0
 --- !u!54 &2248546196727634163
 Rigidbody:
   m_ObjectHideFlags: 0

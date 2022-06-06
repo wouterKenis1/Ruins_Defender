@@ -69,18 +69,21 @@ public class Tower : MonoBehaviour
         UpdateLineRenderer();
     }
 
-    
+
 
     public void Shoot(Enemy enemy)
     {
+        if(enemy == null) { return; }
+        
         cooldownRemaining = 1 / shotsPerSecond;
         enemiesInRange.Remove(enemy);
         Destroy(enemy.gameObject);
         Debug.Log("Shot enemy");
-        if(lr != null)
+        if (lr != null)
         {
             lr.SetPosition(1, enemy.transform.position);
         }
+        
     }
 
     public void UpdateLineRenderer()

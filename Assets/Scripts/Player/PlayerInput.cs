@@ -30,6 +30,8 @@ public class PlayerInput : MonoBehaviour
     [SerializeField]
     private KeyCode lifeTap = KeyCode.R;
 
+    [SerializeField] GameObject craftingBench;
+
     /*
     [SerializeField]
     private float dashCooldownTotal = 2;
@@ -115,7 +117,8 @@ public class PlayerInput : MonoBehaviour
             }
         }
 
-        if(Input.GetMouseButtonDown(0))
+        //The && vector3.distance.. prevents players from shooting while in the crafting menu - needs a fix
+        if(Input.GetMouseButtonDown(0) && Vector3.Distance(transform.position, craftingBench.transform.position) >= 3)
         {
             Ray ray = camCam.ScreenPointToRay(_input.MousePosition);
 
