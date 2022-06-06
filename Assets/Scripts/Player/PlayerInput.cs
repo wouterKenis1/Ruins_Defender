@@ -27,6 +27,9 @@ public class PlayerInput : MonoBehaviour
     [SerializeField]
     private KeyCode interactKey = KeyCode.E;
 
+    [SerializeField]
+    private KeyCode lifeTap = KeyCode.R;
+
     /*
     [SerializeField]
     private float dashCooldownTotal = 2;
@@ -121,6 +124,12 @@ public class PlayerInput : MonoBehaviour
                 castSpell();
                 
             }
+        }
+
+        
+        if (Input.GetKeyDown(lifeTap))
+        {
+            Player.Instance.ConvertHealthToMana();
         }
     }
 

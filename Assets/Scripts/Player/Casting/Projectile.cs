@@ -77,6 +77,7 @@ public class Projectile : MonoBehaviour
             {
                 Destroy(other.attachedRigidbody.gameObject);
                 Debug.Log("Destroyed enemy");
+                Destroy(this.gameObject);
             }
         }        
     }

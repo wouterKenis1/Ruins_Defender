@@ -60,13 +60,19 @@ public class Player : MonoBehaviour
     {
         Debug.Log("Player was hit by: " + other.name);
 
-        var enemy = other.attachedRigidbody.GetComponent<Enemy>();
-        if (enemy != null)
+        //if (other.tag == "Enemy")was needed to prevent water from giving an error on collision
+        if (other.tag == "Enemy")
         {
-            TakeDamage(enemy.dmg);
+            var enemy = other.attachedRigidbody.GetComponent<Enemy>();
+            if (enemy != null)
+            {
+                TakeDamage(enemy.dmg);
+            }
+
+            Destroy(other.attachedRigidbody.gameObject);
         }
 
-        Destroy(other.attachedRigidbody.gameObject);
+        
     }
     private void Update()
     {
